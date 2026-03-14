@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "TEAMID.com.one360.wealth",
+        "paths": ["/invite/*"]
+      }
+    ]
+  }
+}
