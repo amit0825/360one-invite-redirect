@@ -5,16 +5,7 @@
       "namespace": "android_app",
       "package_name": "com.one360.wealth",
       "sha256_cert_fingerprints": [
-        "6B:A4:54:F8:82:94:8A:9C:6B:74:57:96:BA:D3:65:77:74:23:99:55:81:CC:AE:AD:44:5A:7A:D7:72:0F:9A:ED"
-      ]
-    }
-  },
-  {
-    "relation": ["delegate_permission/common.handle_all_urls"],
-    "target": {
-      "namespace": "android_app",
-      "package_name": "com.one360.privateDev",
-      "sha256_cert_fingerprints": [
+        "6B:A4:54:F8:82:94:8A:9C:6B:74:57:96:BA:D3:65:77:74:23:99:55:81:CC:AE:AD:44:5A:7A:D7:72:0F:9A:ED",
         "A7:A1:26:10:42:E8:4D:D9:BF:A2:48:F6:22:5D:B4:B8:23:4F:9B:32:BD:B2:D0:79:22:FA:46:44:9E:00:BC:FB"
       ]
     }
