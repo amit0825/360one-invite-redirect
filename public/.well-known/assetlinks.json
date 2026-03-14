@@ -13,7 +13,7 @@
     "relation": ["delegate_permission/common.handle_all_urls"],
     "target": {
       "namespace": "android_app",
-      "package_name": "com.one360.wealth.dev",
+      "package_name": "com.one360.privateDev",
       "sha256_cert_fingerprints": [
         "A7:A1:26:10:42:E8:4D:D9:BF:A2:48:F6:22:5D:B4:B8:23:4F:9B:32:BD:B2:D0:79:22:FA:46:44:9E:00:BC:FB"
       ]
