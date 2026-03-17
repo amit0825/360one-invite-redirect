@@ -1,6 +1,14 @@
 {
   "routes": [
     {
+      "src": "/.well-known/assetlinks.json",
+      "dest": "/.well-known/assetlinks.json"
+    },
+    {
+      "src": "/.well-known/apple-app-site-association",
+      "dest": "/.well-known/apple-app-site-association"
+    },
+    {
       "src": "/invite/(.*)",
       "dest": "/index.html"
     }
