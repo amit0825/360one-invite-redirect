@@ -2,127 +2,125 @@
 <html lang="en">
 
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Opening 360 ONE Wealth</title>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- WhatsApp & Social Preview -->
+  <meta property="og:title" content="Join 360 ONE Wealth" />
+  <meta property="og:description" content="Manage your family's investments and insurance in one place." />
+  <meta property="og:image" content="https://invite.360one.com/logo.png" />
+  <meta property="og:type" content="website" />
 
-<title>Opening 360 ONE Wealth</title>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Join 360 ONE Wealth">
+  <meta name="twitter:description" content="Premium wealth management for your family.">
+  <meta name="twitter:image" content="https://invite.360one.com/logo.png">
 
-<!-- WhatsApp Preview -->
-<meta property="og:title" content="Join 360 ONE Wealth" />
-<meta property="og:description" content="Manage your family's investments and insurance in one place." />
-<meta property="og:image" content="https://invite.360one.com/logo.png" />
-<meta property="og:type" content="website" />
-
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Join 360 ONE Wealth">
-<meta name="twitter:description" content="Premium wealth management for your family.">
-<meta name="twitter:image" content="https://invite.360one.com/logo.png">
-
-<script>
-  (function () {
-    const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.one360.wealth";
-    const APP_STORE = "https://apps.apple.com/in/app/360-one-wealth-the-reserve/id6751482235";
-  
-    function getMobileOS() {
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-      if (/android/i.test(ua)) return "android";
-      if (/iPad|iPhone|iPod/.test(ua)) return "ios";
-      return "other";
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+      text-align: center;
+      padding-top: 120px;
+      background: #ffffff;
     }
-  
-    function getDeepLink() {
-      const path = window.location.pathname;
-      const segments = path.split("/");
-      let mobile = "";
-      if (segments.length >= 3) {
-        mobile = segments[2];
+
+    .logo {
+      width: 90px;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      font-size: 22px;
+      color: #111;
+    }
+
+    p {
+      color: #777;
+      font-size: 15px;
+    }
+
+    .loader {
+      margin-top: 40px;
+      border: 4px solid #f3f3f3;
+      border-top: 4px solid #ff7a00;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    @keyframes spin {
+      0% {
+        transform: rotate(0deg);
       }
-      return `360-one-wealth-the-reserve://invite/${mobile}`;
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
-  
-    function openApp() {
-      const os = getMobileOS();
-      const deepLink = getDeepLink();
-  
-      if (os === "android") {
-        // Directly try to open the app
-        window.location = deepLink;
-  
-        // Fallback to Play Store if not installed
-        setTimeout(() => {
+  </style>
+
+  <script>
+    (function () {
+      const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.one360.wealth";
+      const APP_STORE = "https://apps.apple.com/in/app/360-one-wealth-the-reserve/id6751482235";
+
+      function getMobileOS() {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        if (/android/i.test(ua)) return "android";
+        if (/iPad|iPhone|iPod/.test(ua)) return "ios";
+        return "other";
+      }
+
+      function getDeepLink() {
+        const path = window.location.pathname;
+        const segments = path.split("/");
+        let mobile = "";
+        if (segments.length >= 3) {
+          mobile = segments[2];
+        }
+        return `360-one-wealth-the-reserve://invite/${mobile}`;
+      }
+
+      function openApp() {
+        const os = getMobileOS();
+        const deepLink = getDeepLink();
+
+        if (os === "android") {
+          // Directly try to open the app
+          window.location = deepLink;
+
+          // Fallback to Play Store if app isn't installed
+          setTimeout(() => {
+            window.location = PLAY_STORE;
+          }, 2000);
+        } else if (os === "ios") {
+          // iOS Universal Link: let system handle it
+          window.location = window.location.href;
+
+          // Fallback to App Store
+          setTimeout(() => {
+            window.location = APP_STORE;
+          }, 2000);
+        } else {
+          // Desktop / others
           window.location = PLAY_STORE;
-        }, 2000);
-      } else if (os === "ios") {
-        // iOS Universal Link automatically opens app if installed
-        window.location = window.location.href;
-  
-        // Fallback to App Store
-        setTimeout(() => {
-          window.location = APP_STORE;
-        }, 2000);
-      } else {
-        // Desktop / other
-        window.location = PLAY_STORE;
+        }
       }
-    }
-  
-    window.onload = openApp;
-  })();
+
+      window.onload = openApp;
+    })();
   </script>
-
-<style>
-body{
-  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
-  text-align:center;
-  padding-top:120px;
-  background:#ffffff;
-}
-
-.logo{
-  width:90px;
-  margin-bottom:24px;
-}
-
-h2{
-  font-size:22px;
-  color:#111;
-}
-
-p{
-  color:#777;
-  font-size:15px;
-}
-
-.loader{
-  margin-top:40px;
-  border:4px solid #f3f3f3;
-  border-top:4px solid #ff7a00;
-  border-radius:50%;
-  width:40px;
-  height:40px;
-  animation:spin 1s linear infinite;
-  margin-left:auto;
-  margin-right:auto;
-}
-
-@keyframes spin{
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-</style>
-
 </head>
 
 <body>
-
-<img class="logo" src="/logo.svg" alt="360 ONE Wealth"/>
-
-<h2>Opening 360 ONE Wealth</h2>
-<p>Please wait while we redirect you...</p>
-
-<div class="loader"></div>
-
+  <img class="logo" src="/logo.svg" alt="360 ONE Wealth" />
+  <h2>Opening 360 ONE Wealth</h2>
+  <p>Please wait while we redirect you...</p>
+  <div class="loader"></div>
 </body>
 
 </html>
