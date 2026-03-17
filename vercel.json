@@ -8,6 +8,13 @@
       "dest": "/.well-known/apple-app-site-association"
     },
     {
+      "src": "/.well-known/assetlinks.json",
+      "headers": {
+        "Content-Type": "application/json"
+      },
+      "dest": "/.well-known/assetlinks.json"
+    },
+    {
       "src": "/invite/(.*)",
       "dest": "/index.html"
     }
