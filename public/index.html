@@ -33,33 +33,46 @@
     function redirect() {
   
       const ua = navigator.userAgent;
-  
-      // 🍏 iOS → DO NOTHING (let Universal Link handle)
-      if (/iPad|iPhone|iPod/.test(ua)) return;
+      const isIOS = /iPad|iPhone|iPod/.test(ua);
+      const isAndroid = /android/i.test(ua);
   
       const mobile = getMobileFromPath();
   
-      const intentLink =
-        `intent://invite/${mobile}#Intent;scheme=360-one-wealth-the-reserve;package=com.one360.wealth;end`;
+      // 🤖 ANDROID → full control
+      if (isAndroid) {
   
-      const start = Date.now();
+        const intentLink =
+          `intent://invite/${mobile}#Intent;scheme=360-one-wealth-the-reserve;package=com.one360.wealth;end`;
   
-      // 🤖 Android deep link
-      window.location.replace(intentLink);
+        const start = Date.now();
   
-      // 🔁 fallback
-      setTimeout(() => {
-        if (Date.now() - start < 2500) {
-          window.location.replace(PLAY_STORE);
-        }
-      }, 1500);
+        window.location.replace(intentLink);
+  
+        setTimeout(() => {
+          if (Date.now() - start < 2500) {
+            window.location.replace(PLAY_STORE);
+          }
+        }, 1500);
+  
+        return;
+      }
+  
+      // 🍏 iOS → DO NOT deep link, only fallback
+      if (isIOS) {
+  
+        setTimeout(() => {
+          window.location.replace(APP_STORE);
+        }, 2000);
+  
+        return;
+      }
     }
   
     redirect();
   
   })();
   </script>
-  
+
 <style>
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
@@ -107,6 +120,9 @@ p{
 
 <!-- ✅ SVG Logo -->
 <img class="logo" src="/logo.svg" alt="360 ONE Wealth"/>
+
+<h2>Opening 360 ONE Wealth</h2>
+<p>Please wait while we redirect you...</p>
 
 <div class="loader"></div>
 
