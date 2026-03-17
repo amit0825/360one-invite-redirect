@@ -6,12 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Opening 360 ONE Wealth</title>
 
-  <!-- WhatsApp & Social Preview -->
+  <!-- Social meta tags -->
   <meta property="og:title" content="Join 360 ONE Wealth" />
   <meta property="og:description" content="Manage your family's investments and insurance in one place." />
   <meta property="og:image" content="https://invite.360one.com/logo.png" />
   <meta property="og:type" content="website" />
-
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Join 360 ONE Wealth">
   <meta name="twitter:description" content="Premium wealth management for your family.">
@@ -63,52 +62,41 @@
     }
   </style>
 
-<script>
-  (function() {
-    const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.one360.wealth";
-    const APP_STORE = "https://apps.apple.com/in/app/360-one-wealth-the-reserve/id6751482235";
-  
-    function getMobileOS() {
-      const ua = navigator.userAgent || navigator.vendor || window.opera;
-      if (/android/i.test(ua)) return "android";
-      if (/iPad|iPhone|iPod/.test(ua)) return "ios";
-      return "other";
-    }
-  
-    function getDeepLink() {
-      const path = window.location.pathname;
-      const segments = path.split("/");
-      let mobile = segments.length >= 3 ? segments[2] : "";
-      return `360-one-wealth-the-reserve://invite/${mobile}`;
-    }
-  
-    function openApp() {
-      const os = getMobileOS();
-      const deepLink = getDeepLink();
-  
-      if (os === "android") {
-        // Open app via deep link, fallback to Play Store
-        window.location = deepLink;
-        setTimeout(() => window.location = PLAY_STORE, 2000);
-      } else if (os === "ios") {
-        // Only fallback to App Store
-        // Let Universal Link handle opening the app
-        setTimeout(() => window.location = APP_STORE, 2000);
-      } else {
-        // Desktop fallback
-        window.location = PLAY_STORE;
-      }
-    }
-  
-    // Wait a tiny bit before trying to open app
-    window.addEventListener("load", () => setTimeout(openApp, 500));
-  })();
-  </script>
+  <script>
+    (function () {
+      const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.one360.wealth";
+      const APP_STORE = "https://apps.apple.com/in/app/360-one-wealth-the-reserve/id6751482235";
 
+      function getMobileOS() {
+        const ua = navigator.userAgent || navigator.vendor || window.opera;
+        if (/android/i.test(ua)) return "android";
+        if (/iPad|iPhone|iPod/.test(ua)) return "ios";
+        return "other";
+      }
+
+      function openApp() {
+        const os = getMobileOS();
+        const httpsLink = window.location.href; // your App Link URL
+
+        if (os === "android") {
+          // Try opening Android App Link
+          window.location = httpsLink;
+          setTimeout(() => window.location = PLAY_STORE, 2000); // fallback
+        } else if (os === "ios") {
+          // iOS: Universal Links auto-open app, fallback to App Store
+          setTimeout(() => window.location = APP_STORE, 2000);
+        } else {
+          window.location = PLAY_STORE; // Desktop fallback
+        }
+      }
+
+      window.addEventListener("load", () => setTimeout(openApp, 500));
+    })();
+  </script>
 </head>
 
 <body>
-  <img class="logo" src="/logo.svg" alt="360 ONE Wealth" />
+  <img class="logo" src="/logo.png" alt="360 ONE Wealth" />
   <h2>Opening 360 ONE Wealth</h2>
   <p>Please wait while we redirect you...</p>
   <div class="loader"></div>
