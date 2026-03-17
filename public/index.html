@@ -64,7 +64,7 @@
   </style>
 
 <script>
-  (function () {
+  (function() {
     const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.one360.wealth";
     const APP_STORE = "https://apps.apple.com/in/app/360-one-wealth-the-reserve/id6751482235";
   
@@ -78,44 +78,33 @@
     function getDeepLink() {
       const path = window.location.pathname;
       const segments = path.split("/");
-      let mobile = "";
-      if (segments.length >= 3) mobile = segments[2];
+      let mobile = segments.length >= 3 ? segments[2] : "";
       return `360-one-wealth-the-reserve://invite/${mobile}`;
     }
   
     function openApp() {
       const os = getMobileOS();
       const deepLink = getDeepLink();
-      const start = Date.now();
-      let pageHidden = false;
-  
-      document.addEventListener("visibilitychange", () => {
-        if (document.hidden) pageHidden = true;
-      });
   
       if (os === "android") {
+        // Open app via deep link, fallback to Play Store
         window.location = deepLink;
-        setTimeout(() => {
-          if (!pageHidden && Date.now() - start < 2500) {
-            window.location = PLAY_STORE;
-          }
-        }, 2000);
+        setTimeout(() => window.location = PLAY_STORE, 2000);
       } else if (os === "ios") {
-        window.location = deepLink;
-        setTimeout(() => {
-          if (!pageHidden && Date.now() - start < 2500) {
-            window.location = APP_STORE;
-          }
-        }, 2000);
+        // Only fallback to App Store
+        // Let Universal Link handle opening the app
+        setTimeout(() => window.location = APP_STORE, 2000);
       } else {
+        // Desktop fallback
         window.location = PLAY_STORE;
       }
     }
   
-    window.onload = openApp;
+    // Wait a tiny bit before trying to open app
+    window.addEventListener("load", () => setTimeout(openApp, 500));
   })();
   </script>
-  
+
 </head>
 
 <body>
