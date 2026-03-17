@@ -2,14 +2,8 @@
   "applinks": {
     "details": [
       {
-        "appIDs": [
-          "CB229MCXUK.com.one360.wealth"
-        ],
-        "components": [
-          {
-            "/": "/invite/*"
-          }
-        ]
+        "appID": "CB229MCXUK.com.one360.wealth",
+        "paths": [ "/invite/*" ]
       }
     ]
   }
