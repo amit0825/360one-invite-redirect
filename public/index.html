@@ -8,7 +8,7 @@
 
 <title>Opening 360 ONE Wealth</title>
 
-<!-- WhatsApp Preview (MUST be PNG/JPG) -->
+<!-- WhatsApp Preview -->
 <meta property="og:title" content="Join 360 ONE Wealth" />
 <meta property="og:description" content="Manage your family's investments and insurance in one place." />
 <meta property="og:image" content="https://invite.360one.com/logo.png" />
@@ -20,58 +20,50 @@
 <meta name="twitter:image" content="https://invite.360one.com/logo.png">
 
 <script>
-  (function () {
-  
-    const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.one360.wealth";
-    const APP_STORE = "https://apps.apple.com/in/app/360-one-wealth-the-reserve/id6751482235";
-  
-    function getMobileFromPath() {
-      const path = window.location.pathname.split("/");
-      return path[path.length - 1] || "";
+(function () {
+
+  const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.one360.wealth";
+  const APP_STORE = "https://apps.apple.com/in/app/360-one-wealth-the-reserve/id6751482235";
+
+  function redirect() {
+
+    const ua = navigator.userAgent;
+    const isIOS = /iPad|iPhone|iPod/.test(ua);
+    const isAndroid = /android/i.test(ua);
+
+    // 🤖 ANDROID → let App Links handle it
+    if (isAndroid) {
+
+      // If app not installed → fallback to Play Store
+      setTimeout(() => {
+        window.location.replace(PLAY_STORE);
+      }, 1500);
+
+      return;
     }
-  
-    function redirect() {
-  
-      const ua = navigator.userAgent;
-      const isIOS = /iPad|iPhone|iPod/.test(ua);
-      const isAndroid = /android/i.test(ua);
-  
-      const mobile = getMobileFromPath();
-  
-      // 🤖 ANDROID → full control
-      if (isAndroid) {
-  
-        const intentLink =
-          `intent://invite/${mobile}#Intent;scheme=360-one-wealth-the-reserve;package=com.one360.wealth;end`;
-  
-        const start = Date.now();
-  
-        window.location.replace(intentLink);
-  
-        setTimeout(() => {
-          if (Date.now() - start < 2500) {
-            window.location.replace(PLAY_STORE);
-          }
-        }, 1500);
-  
-        return;
-      }
-  
-      // 🍏 iOS → DO NOT deep link, only fallback
-      if (isIOS) {
-  
-        setTimeout(() => {
-          window.location.replace(APP_STORE);
-        }, 2000);
-  
-        return;
-      }
+
+    // 🍏 iOS → let Universal Links handle it
+    if (isIOS) {
+
+      // If app not installed → fallback to App Store
+      setTimeout(() => {
+        window.location.replace(APP_STORE);
+      }, 2000);
+
+      return;
     }
-  
-    redirect();
-  
-  })();
-  </script>
+
+    // 🌐 Desktop / others → optional (send to stores)
+    setTimeout(() => {
+      window.location.replace(PLAY_STORE);
+    }, 1500);
+
+  }
+
+  redirect();
+
+})();
+</script>
 
 <style>
 body{
@@ -118,7 +110,6 @@ p{
 
 <body>
 
-<!-- ✅ SVG Logo -->
 <img class="logo" src="/logo.svg" alt="360 ONE Wealth"/>
 
 <h2>Opening 360 ONE Wealth</h2>
