@@ -86,32 +86,28 @@
       }
 
       function openApp() {
-        const os = getMobileOS();
-        const deepLink = getDeepLink();
+  const os = getMobileOS();
+  const deepLink = getDeepLink();
 
-        if (os === "android") {
-          // Directly try to open the app
-          window.location = deepLink;
+  if (os === "android") {
+    // Directly try to open the app
+    window.location = deepLink;
 
-          // Fallback to Play Store if app isn't installed
-          setTimeout(() => {
-            window.location = PLAY_STORE;
-          }, 2000);
-        } else if (os === "ios") {
-          // iOS Universal Link: let system handle it
-          window.location = window.location.href;
-
-          // Fallback to App Store
-          setTimeout(() => {
-            window.location = APP_STORE;
-          }, 2000);
-        } else {
-          // Desktop / others
-          window.location = PLAY_STORE;
-        }
-      }
-
-      window.onload = openApp;
+    // Fallback to Play Store if app isn't installed
+    setTimeout(() => {
+      window.location = PLAY_STORE;
+    }, 2000);
+  } else if (os === "ios") {
+    // iOS Universal Link: just wait for fallback
+    setTimeout(() => {
+      window.location = APP_STORE;
+    }, 2000);
+  } else {
+    // Desktop / others
+    window.location = PLAY_STORE;
+  }
+}
+ window.onload = openApp;
     })();
   </script>
 </head>
