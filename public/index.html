@@ -20,50 +20,56 @@
 <meta name="twitter:image" content="https://invite.360one.com/logo.png">
 
 <script>
-(function () {
-
-  const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.one360.wealth";
-  const APP_STORE = "https://apps.apple.com/in/app/360-one-wealth-the-reserve/id6751482235";
-
-  function redirect() {
-
-    const ua = navigator.userAgent;
-    const isIOS = /iPad|iPhone|iPod/.test(ua);
-    const isAndroid = /android/i.test(ua);
-
-    // 🤖 ANDROID → let App Links handle it
-    if (isAndroid) {
-
-      // If app not installed → fallback to Play Store
-      setTimeout(() => {
-        window.location.replace(PLAY_STORE);
-      }, 1500);
-
-      return;
+  (function () {
+    const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.one360.wealth";
+    const APP_STORE = "https://apps.apple.com/in/app/360-one-wealth-the-reserve/id6751482235";
+  
+    function getMobileOS() {
+      const ua = navigator.userAgent || navigator.vendor || window.opera;
+      if (/android/i.test(ua)) return "android";
+      if (/iPad|iPhone|iPod/.test(ua)) return "ios";
+      return "other";
     }
-
-    // 🍏 iOS → let Universal Links handle it
-    if (isIOS) {
-
-      // If app not installed → fallback to App Store
-      setTimeout(() => {
-        window.location.replace(APP_STORE);
-      }, 2000);
-
-      return;
+  
+    function getDeepLink() {
+      const path = window.location.pathname;
+      const segments = path.split("/");
+      let mobile = "";
+      if (segments.length >= 3) {
+        mobile = segments[2];
+      }
+      return `360-one-wealth-the-reserve://invite/${mobile}`;
     }
-
-    // 🌐 Desktop / others → optional (send to stores)
-    setTimeout(() => {
-      window.location.replace(PLAY_STORE);
-    }, 1500);
-
-  }
-
-  redirect();
-
-})();
-</script>
+  
+    function openApp() {
+      const os = getMobileOS();
+      const deepLink = getDeepLink();
+  
+      if (os === "android") {
+        // Directly try to open the app
+        window.location = deepLink;
+  
+        // Fallback to Play Store if not installed
+        setTimeout(() => {
+          window.location = PLAY_STORE;
+        }, 2000);
+      } else if (os === "ios") {
+        // iOS Universal Link automatically opens app if installed
+        window.location = window.location.href;
+  
+        // Fallback to App Store
+        setTimeout(() => {
+          window.location = APP_STORE;
+        }, 2000);
+      } else {
+        // Desktop / other
+        window.location = PLAY_STORE;
+      }
+    }
+  
+    window.onload = openApp;
+  })();
+  </script>
 
 <style>
 body{
