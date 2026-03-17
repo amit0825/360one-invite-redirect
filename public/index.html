@@ -8,7 +8,7 @@
 
 <title>Opening 360 ONE Wealth</title>
 
-<!-- WhatsApp Preview -->
+<!-- WhatsApp Preview (MUST be PNG/JPG) -->
 <meta property="og:title" content="Join 360 ONE Wealth" />
 <meta property="og:description" content="Manage your family's investments and insurance in one place." />
 <meta property="og:image" content="https://invite.360one.com/logo.png" />
@@ -19,10 +19,60 @@
 <meta name="twitter:description" content="Premium wealth management for your family.">
 <meta name="twitter:image" content="https://invite.360one.com/logo.png">
 
-<script src="/open.js"></script>
+<script>
+  (function () {
+  
+    const PLAY_STORE = "https://play.google.com/store/apps/details?id=com.one360.wealth";
+    const APP_STORE = "https://apps.apple.com/in/app/360-one-wealth-the-reserve/id6751482235";
+  
+    function getMobileOS() {
+      const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+  
+      if (/android/i.test(userAgent)) return "android";
+      if (/iPad|iPhone|iPod/.test(userAgent)) return "ios";
+  
+      return "other";
+    }
+  
+    function getMobileFromPath() {
+      const path = window.location.pathname.split("/");
+      return path[path.length - 1] || "";
+    }
+  
+    function redirect() {
+  
+      // 🔥 ADD IT HERE (VERY IMPORTANT)
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+      if (isIOS) return;
+  
+      const os = getMobileOS();
+      const mobile = getMobileFromPath();
+  
+      const deepLink = `360-one-wealth-the-reserve://invite/${mobile}`;
+  
+      const start = Date.now();
+  
+      window.location.replace(deepLink);
+  
+      setTimeout(function () {
+        const end = Date.now();
+  
+        if (end - start < 2000) {
+          if (os === "android") {
+            window.location.replace(PLAY_STORE);
+          } else if (os === "ios") {
+            window.location.replace(APP_STORE);
+          }
+        }
+      }, 1200);
+    }
+  
+    redirect();
+  
+  })();
+  </script>
 
 <style>
-
 body{
   font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
   text-align:center;
@@ -61,18 +111,14 @@ p{
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
-
 </style>
 
 </head>
 
 <body>
 
-<img class="logo" src="/logo.png" alt="360 ONE Wealth"/>
-
-<h2>Opening 360 ONE Wealth</h2>
-
-<p>Please wait while we redirect you...</p>
+<!-- ✅ SVG Logo -->
+<img class="logo" src="/logo.svg" alt="360 ONE Wealth"/>
 
 <div class="loader"></div>
 
