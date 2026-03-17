@@ -61,6 +61,19 @@
       animation: spin 1s linear infinite;
     }
 
+    .fallback-btn {
+      display: none;
+      margin-top: 32px;
+      padding: 14px 28px;
+      background: #ff7a00;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+    }
 
     @keyframes spin {
       0%  { transform: rotate(0deg); }
@@ -80,8 +93,14 @@
         return "other";
       }
 
-      function redirectToStore(storeUrl) {
-        window.location.href = storeUrl;
+      function showFallbackButton(storeUrl) {
+        var btn = document.getElementById("fallback-btn");
+        if (btn) {
+          btn.href = storeUrl;
+          btn.style.display = "inline-block";
+        }
+        var loader = document.getElementById("loader");
+        if (loader) loader.style.display = "none";
       }
 
       function openApp() {
@@ -102,11 +121,15 @@
           // We attempt the App Link by creating a hidden iframe first.
           // This avoids adding a history entry and prevents the page from
           // visually reloading, while still firing the intent on Android.
-          window.location.href = appLinkUrl;
+          var iframe = document.createElement("iframe");
+          iframe.style.display = "none";
+          iframe.src = appLinkUrl;
+          document.body.appendChild(iframe);
 
           // Fallback: if app not installed or not opened after 2.5s, go to Play Store
           var fallbackTimer = setTimeout(function () {
-            redirectToStore(PLAY_STORE);
+            document.body.removeChild(iframe);
+            showFallbackButton(PLAY_STORE);
           }, 2500);
 
           // If the page goes to background (app opened), cancel the fallback
@@ -121,14 +144,13 @@
           // iOS Universal Links are triggered automatically when the browser
           // navigates to a URL that matches your AASA file.
           // We just set a fallback timer in case the app isn't installed.
-          window.location.href = appLinkUrl;
           setTimeout(function () {
-            redirectToStore(APP_STORE);
+            showFallbackButton(APP_STORE);
           }, 2500);
 
         } else {
-          // Desktop: redirect to Play Store
-          redirectToStore(PLAY_STORE);
+          // Desktop: just show the Play Store button
+          showFallbackButton(PLAY_STORE);
         }
       }
 
@@ -144,7 +166,7 @@
   <h2>Opening 360 ONE Wealth</h2>
   <p>Please wait while we redirect you…</p>
   <div class="loader" id="loader"></div>
-
+  <a class="fallback-btn" id="fallback-btn" href="#">Open in App Store</a>
 </body>
 
 </html>
