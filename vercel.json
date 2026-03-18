@@ -9,7 +9,7 @@
       "dest": "/.well-known/apple-app-site-association"
     },
     {
-      "src": "/invite/(.*)",
+      "src": "/the-reserve-invite/(.*)",
       "dest": "/index.html"
     }
   ]
